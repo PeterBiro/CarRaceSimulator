@@ -12,6 +12,7 @@ public class Main {
     static final int chanceOfRain = 30;
 
     static ArrayList<Motorcycle> motorcyclesList = new ArrayList<>();
+    static ArrayList<Truck> trucksList = new ArrayList<>();
 
 
     /*
@@ -32,14 +33,22 @@ public class Main {
             motorcyclesList.add(tmpBike);
         }
 
-        //
+        //creating trucks
+        for (int i = 0; i < 10; i++) {
+            Truck tmpTruck = new Truck();
+            trucksList.add(tmpTruck);
+        }
     }
 
     public static void simulateRace() {
 
         for (int i = 0; i < raceRounds ; i++) {
+
             for (Motorcycle bike: motorcyclesList) {
                 bike.moveForAnHour(isRaining.get(i));
+            }
+            for (Truck truck: trucksList) {
+                truck.moveForAnHour();
             }
 
         }
@@ -49,6 +58,10 @@ public class Main {
 
         for (Motorcycle bike:motorcyclesList) {
             System.out.println("The motorcycle: '" + bike.name + "' got " + bike.distanceTravelled +" km far");
+        }
+
+        for (Truck truck:trucksList) {
+            System.out.println("The truck: '" + truck.name + "' got " + truck.distanceTravelled +" km far");
         }
     }
 
