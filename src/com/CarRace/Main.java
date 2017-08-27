@@ -13,7 +13,7 @@ public class Main {
 
     static ArrayList<Motorcycle> motorcyclesList = new ArrayList<>();
     static ArrayList<Truck> trucksList = new ArrayList<>();
-
+    static ArrayList<Car> carsList = new ArrayList<>();
 
     /*
     Generating weather conditions for the whole race
@@ -38,6 +38,12 @@ public class Main {
             Truck tmpTruck = new Truck();
             trucksList.add(tmpTruck);
         }
+
+        //creating cars
+        for (int i = 0; i < 10 ; i++) {
+            Car tmpCar = new Car();
+            carsList.add(tmpCar);
+        }
     }
 
     public static void simulateRace() {
@@ -47,10 +53,17 @@ public class Main {
             for (Motorcycle bike: motorcyclesList) {
                 bike.moveForAnHour(isRaining.get(i));
             }
+
             for (Truck truck: trucksList) {
                 truck.moveForAnHour();
             }
 
+            if (isRaining.get(i)) Car.setSpeedLimit(70);
+                else Car.setSpeedLimit(110);
+            for (Car car: carsList) {
+
+                car.moveForAnHour();
+            }
         }
     }
 
@@ -63,13 +76,17 @@ public class Main {
         for (Truck truck:trucksList) {
             System.out.println("The truck: '" + truck.name + "' got " + truck.distanceTravelled +" km far");
         }
+
+        for (Car car:carsList) {
+            System.out.println("The car: '" + car.name + "' got " + car.distanceTravelled +" km far");
+        }
     }
 
     public static void main(String[] args) {
-        //Main app = new Main();
+        //Main app = new Main(); Melyiknek van értelme? static vagy app.createVehicles();
         createVehicles();
-        simulateRace(); // simulates the race by calling moveForAnHour() on every vehicle 50 times and setting whether its raining.
-        printRaceResults(); // prints each vehicle's name, distance traveled ant type.
+        simulateRace();
+        printRaceResults();
 
     }
 }
